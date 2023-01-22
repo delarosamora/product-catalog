@@ -7,14 +7,9 @@
 @section('content')
 
 <h1>Productos</h1>
-<ul>
+<ul class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 g-3 g-lg-4 list-unstyled justify-content-around m-auto">
     @foreach ($products as $product)
-        <li>
-            <p>{{ $product->name }}</p>
-            <a href="{{ route('products.show', ['product' => $product]) }}">Ver</a>
-            <a href="{{ route('products.edit', ['product' => $product]) }}">Editar</a>
-            <a href="{{ route('products.show', ['product' => $product]) }}">Eliminar</a>
-        </li>
+        @include('products.include.product-card', ['product' => $product])
     @endforeach
 </ul>
 

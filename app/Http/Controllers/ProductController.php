@@ -8,6 +8,7 @@ use App\Models\Category;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Log;
+use Storage;
 use Throwable;
 
 class ProductController extends Controller
@@ -38,8 +39,14 @@ class ProductController extends Controller
             $product->category_id = $request->category_id;
             $product->description = $request->description;
             $product->save();
+            if ($request->hasFile('image')){
+                Storage::putFileAs('public/products', $request->file('image'), $product->code_tag . '.' . $request->file('image')->extension());
+                $product->image = $product->code_tag . '.' . $request->file('image')->extension();
+                $product->save();
+            }
 
-            return redirect()->route('products.show', ['product' => $product]);
+            return redirect()
+            ->route('products.show', ['product' => $product])->with('notification', ['status' => 'success', 'title' => $product->name, 'text' => 'Producto creado correctamente']);
         }catch(Throwable $e){
             Log::error($e);
         }
@@ -77,9 +84,15 @@ class ProductController extends Controller
             $product->price = $request->price;
             $product->category_id = $request->category_id;
             $product->description = $request->description;
+            if ($request->hasFile('image')){
+                Storage::putFileAs('public/products', $request->file('image'), $product->code_tag . '.' . $request->file('image')->extension());
+                $product->image = $product->code_tag . '.' . $request->file('image')->extension();
+            }
             $product->save();
 
-            return redirect()->route('products.show', ['product' => $product]);
+            return redirect()
+            ->route('products.show', ['product' => $product])
+            ->with('notification', ['status' => 'success', 'title' => $product->name, 'text' => 'Producto actualizado correctamente']);
         }catch(Throwable $e){
             Log::error($e);
         }
@@ -93,6 +106,13 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $product = Product::findOrFail($id);
+            $product->delete();
+            return redirect()
+            ->route('products.index')->with('notification', ['status' => 'success', 'title' => $product->name, 'text' => 'Producto eliminado']);
+        }catch(Throwable $e){
+            Log::error($e);
+        }
     }
 }

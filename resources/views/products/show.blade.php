@@ -6,10 +6,7 @@
 
 @section('content')
 
-<h1>Ver producto</h1>
-<ul>
-    <li>{{ $product->name }}</li>
-    <li>{{ $product->description }}</li>
-</ul>
+@include('products.include.product-actions', ['product' => $product])
+@include('products.include.product-page', ['product' => $product])
 
 @endsection

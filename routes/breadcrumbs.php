@@ -18,7 +18,7 @@ Breadcrumbs::for('products.index', function (BreadcrumbTrail $trail) {
 // View Product
 Breadcrumbs::for('products.show', function (BreadcrumbTrail $trail, Product $product) {
     $trail->parent('products.index');
-    $trail->push($product->id, route('products.show', ['product' => $product]));
+    $trail->push($product->name, route('products.show', ['product' => $product]));
 });
 
 // Edit Product
@@ -33,14 +33,7 @@ Breadcrumbs::for('products.create', function (BreadcrumbTrail $trail) {
     $trail->push('Crear Producto', route('products.create'));
 });
 
-// Home > Blog
-Breadcrumbs::for('blog', function (BreadcrumbTrail $trail) {
-    $trail->parent('home');
-    $trail->push('Blog', route('blog'));
-});
-
-// Home > Blog > [Category]
-Breadcrumbs::for('category', function (BreadcrumbTrail $trail, $category) {
-    $trail->parent('blog');
-    $trail->push($category->title, route('category', $category));
+// List Products
+Breadcrumbs::for('login', function (BreadcrumbTrail $trail) {
+    $trail->push('Iniciar sesión', route('login'));
 });
