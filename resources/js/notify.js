@@ -7,6 +7,10 @@ $(() => {
     const notificationTitle = $('#status-notification').data("title")
     const notificationText = $('#status-notification').data("text")
 
+    if (notificationStatus == undefined || notificationTitle == undefined || notificationText == undefined){
+        return
+    }
+
     new Notify({
         status: notificationStatus,
         title: notificationTitle,
