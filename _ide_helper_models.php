@@ -45,6 +45,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Category $category
  * @property-read string $code_tag
+ * @property-read string $safe_image
  * @method static \Illuminate\Database\Eloquent\Builder|Product newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Product newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Product query()

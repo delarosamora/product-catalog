@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use File;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Storage;
 
 class Product extends Model
 {
@@ -25,6 +27,12 @@ class Product extends Model
         $id = $this->id;
         $categoryCode = $this->category->code;
         return "$categoryCode-$id";
+    }
+
+    public function getSafeImageAttribute() : string
+    {
+        return (is_null($this->image) || !Storage::disk('public')->exists('products/' . $this->image)) ?
+        'default.jpg' : $this->image;
     }
     #endregion
 }

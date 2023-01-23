@@ -8,7 +8,7 @@
     </div>
 @endif
 
-<form class="p-4 border border-2 shadow" method="POST" action="{{ route('do-login') }}">
+<form class="p-4 border border-2 shadow rounded-4" method="POST" action="{{ route('do-login') }}">
     @csrf
     <div class="mb-3 row">
         <label for="email" class="col-sm-2 col-form-label"><i class="bi bi-envelope-at-fill"></i> Email</label>

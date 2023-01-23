@@ -43,7 +43,7 @@
             </div>
         </div>
         <div class="col-12 col-lg-6 text-center">
-            <img class="w-50 img-thumbnail" id="previewImg" @isset($product) src="/storage/products/{{ $product->image }}" @endisset>
+            <img class="w-50 img-thumbnail" id="previewImg" @isset($product) src="/storage/products/{{ $product->safe_image }}" @endisset>
         </div>
         <div class="col-12">
             <button type="submit" class="btn btn-success"><i class="bi bi-check-circle-fill"></i> Guardar</button>

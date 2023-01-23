@@ -1,6 +1,6 @@
 <li class="col product-card" data-name="{{ $product->name }}" data-category="{{ $product->category_id }}">
-    <div class="card m-auto border border-3 shadow-lg h-100">
-        <img src="/storage/products/{{ $product->image }}" class="card-img-top" alt="..." style="height: 30vh; object-fit: cover">
+    <div class="card m-auto border border-3 shadow-lg h-100 rounded-5">
+        <img src="/storage/products/{{ $product->safe_image }}" class="card-img-top" alt="..." style="height: 30vh; object-fit: cover">
         <div class="card-body text-center">
           <h5 class="text-start card-title">{{ $product->name }}</h5>
           <p class="text-start"><span class="badge text-bg-primary">{{ $product->code_tag }}</span></p>

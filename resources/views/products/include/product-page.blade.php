@@ -1,6 +1,6 @@
 <div class="row row-cols-1 row-cols-lg-2">
   <div class="col p-4 text-center">
-    <img class="img-fluid img-thumbnail w-75" style="max-height: 60vh; object-fit: contain" src="/storage/products/{{ $product->image }}" />
+    <img class="img-fluid img-thumbnail w-75" style="max-height: 60vh; object-fit: contain" src="/storage/products/{{ $product->safe_image }}" />
   </div>
   <div class="col p-2">
     <h1 class="text-center">{{ $product->name }}</h1>

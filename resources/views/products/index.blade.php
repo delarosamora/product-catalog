@@ -7,7 +7,7 @@
 @section('content')
 
 <h1>Productos</h1>
-<div class="row border shadow p-2">
+<div class="row border shadow p-2 rounded-4">
     <h3>Realizar búsqueda</h3>
     <div class="col-12 col-lg-8">
         <label for="search-text" class="form-label">Nombre</label>
