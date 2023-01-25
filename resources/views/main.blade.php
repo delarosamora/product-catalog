@@ -15,9 +15,9 @@
         <!-- Fonts -->
         <link rel="stylesheet" href="{{ mix('/css/fonts.css') }}">
     </head>
-    <body class="d-flex flex-column min-vh-100">
+    <body class="d-flex flex-column min-vh-100 bg-warning">
         @include('menu.menu')
-        <div class="container py-2">
+        <div class="container py-2 flex-grow-1 bg-white shadow-lg">
             <header class="p-3">
                 @yield('breadcrumbs')
             </header>
