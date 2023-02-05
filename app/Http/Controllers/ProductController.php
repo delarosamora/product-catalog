@@ -65,6 +65,7 @@ class ProductController extends Controller
             ->route('products.show', ['product' => $product])->with('notification', ['status' => 'success', 'title' => $product->name, 'text' => 'Producto creado correctamente']);
         }catch(Throwable $e){
             Log::error($e);
+            return back()->with('notification', ['status' => 'error', 'title' => 'Error', 'text' => 'Error al insertar el producto en la base de datos']);
         }
     }
 
@@ -87,7 +88,7 @@ class ProductController extends Controller
             return view('products.show')->with('product', $product);
 
         } catch (ModelNotFoundException $e) {
-            return back();
+            return back()->with('notification', ['status' => 'error', 'title' => 'Producto no encontrado', 'text' => 'Producto no encontrado en la base de datos']);
         }
     }
 
@@ -110,7 +111,7 @@ class ProductController extends Controller
             return view('products.edit')->with('product', $product)->with('categories', Category::all());
 
         } catch (ModelNotFoundException $e) {
-            return back();
+            return back()->with('notification', ['status' => 'error', 'title' => 'Producto no encontrado', 'text' => 'Producto no encontrado en la base de datos']);
         }
     }
 
@@ -131,8 +132,8 @@ class ProductController extends Controller
             return redirect()
             ->route('products.show', ['product' => $product])
             ->with('notification', ['status' => 'success', 'title' => $product->name, 'text' => 'Producto actualizado correctamente']);
-        }catch(Throwable $e){
-            Log::error($e);
+        }catch(ModelNotFoundException $e){
+            return back()->with('notification', ['status' => 'error', 'title' => 'Producto no encontrado', 'text' => 'Producto no encontrado en la base de datos']);
         }
     }
 
@@ -149,8 +150,8 @@ class ProductController extends Controller
             $product->delete();
             return redirect()
             ->route('products.index')->with('notification', ['status' => 'success', 'title' => $product->name, 'text' => 'Producto eliminado']);
-        }catch(Throwable $e){
-            Log::error($e);
+        }catch(ModelNotFoundException $e){
+            return back()->with('notification', ['status' => 'error', 'title' => 'Producto no encontrado', 'text' => 'Producto no encontrado en la base de datos']);
         }
     }
 }
