@@ -9,6 +9,15 @@ use Request;
 class UserController extends Controller
 {
     public function login(){
+        #region SEO
+        $seoTitle = "Login";
+        $separator = config('seo.separator');
+        $appName = config('app.name');
+        $seoImage = config('seo.image_site');
+        $appUrl = config('app.url');
+        seo()->title("$seoTitle $separator $appName");
+        seo()->image("$appUrl/storage/$seoImage");
+        #endregion
         return view('users.login');
     }
 
@@ -32,6 +41,7 @@ class UserController extends Controller
 
     public function changePassword()
     {
+        //TODO CAMBIAR CONTRASEÑA
         Auth::logout();
         return redirect('/');
     }

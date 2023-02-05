@@ -6,7 +6,6 @@ use App\Http\Requests\SaveProductRequest;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\Request;
 use Log;
 use Storage;
 use Throwable;
@@ -16,6 +15,15 @@ class ProductController extends Controller
 
     public function index()
     {
+        #region SEO
+        $seoTitle = "Inicio";
+        $separator = config('seo.separator');
+        $appName = config('app.name');
+        $seoImage = config('seo.image_site');
+        $appUrl = config('app.url');
+        seo()->title("$seoTitle $separator $appName");
+        seo()->image("$appUrl/storage/$seoImage");
+        #endregion
         return view('products.index')
         ->with('products', Product::all())
         ->with('categories', Category::all());
@@ -28,6 +36,12 @@ class ProductController extends Controller
      */
     public function create()
     {
+        #region SEO
+        $seoTitle = "Crear producto";
+        $separator = config('seo.separator');
+        $appName = config('app.name');
+        seo()->title("$seoTitle $separator $appName");
+        #endregion
         return view('products.create')
             ->with('categories', Category::all());
     }
@@ -59,6 +73,17 @@ class ProductController extends Controller
         try {
             
             $product = Product::findOrFail($id);
+            #region SEO
+            $seoTitle = $product->name;
+            $seoDescription = $product->description;
+            $separator = config('seo.separator');
+            $appName = config('app.name');
+            $seoImage = $product->safe_image;
+            $appUrl = config('app.url');
+            seo()->title("$seoTitle $separator $appName");
+            seo()->description($seoDescription);
+            seo()->image("$appUrl/storage/products/$seoImage");
+            #endregion
             return view('products.show')->with('product', $product);
 
         } catch (ModelNotFoundException $e) {
@@ -71,6 +96,17 @@ class ProductController extends Controller
         try {
             
             $product = Product::findOrFail($id);
+            #region SEO
+            $seoTitle = "Editar " . $product->name;
+            $seoDescription = $product->description;
+            $separator = config('seo.separator');
+            $appName = config('app.name');
+            $seoImage = $product->safe_image;
+            $appUrl = config('app.url');
+            seo()->title("$seoTitle $separator $appName");
+            seo()->description($seoDescription);
+            seo()->image("$appUrl/storage/products/$seoImage");
+            #endregion
             return view('products.edit')->with('product', $product)->with('categories', Category::all());
 
         } catch (ModelNotFoundException $e) {
