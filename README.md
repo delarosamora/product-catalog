@@ -1,61 +1,66 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Catálogo de productos
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+![Catalogo de productos](https://raw.githubusercontent.com/delarosamora/product-catalog/master/storage/app/public/image-site.jpg "Catalogo de productos")
 
-## About Laravel
+Este Catalogo de productos fue desarrollado para una clienta que que desea almacenar en una base de datos sus antigüedades y artilugios para tasar los precios.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Tecnologías utilizadas
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<figure>
+    <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg"
+         alt="Laravel" width="300" height="100">
+    <figcaption>Laravel 8.0</figcaption>
+</figure>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+<figure>
+    <img src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo-shadow.png"
+         alt="Boostrap 5.0" width="200" height="150">
+    <figcaption>Boostrap 5.0</figcaption>
+</figure>
 
-## Learning Laravel
+<figure>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/JQuery-Logo.svg"
+         alt="Jquery"  width="300">
+    <figcaption>Jquery</figcaption>
+</figure>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Instalación
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 1. Clonar el repositorio
 
-## Laravel Sponsors
+`git glone https://github.com/delarosamora/product-catalog.git`
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### 2. Ejecutar las migraciones
 
-### Premium Partners
+En tu motor de base de datos favorito (MySQL, PostreSQL, etc) debes crear una base de datos vacía, y si es necesario, indicar los datos de acceso en el fichero .env:
+- Equipo de la base de datos
+- Nombre de la base de datos
+- Usuario de la base de datos
+- Contraseña de la base de datos
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+En mi caso tengo las siguientes
 
-## Contributing
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=product_catalog
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Una vez se indiquen los datos de acceso, se debe ejecutar las migraciones para crear las tablas:
 
-## Code of Conduct
+`php artisan migrate`
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 3. Rellenar datos en las tablas
 
-## Security Vulnerabilities
+Los datos que se rellenan serán usuarios y categorías de productos. Para ello, se debe ejecutar el siguiente comando:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+`php artisan db:seed`
 
-## License
+Este comando lee los siguientes ficheros
+- database\seeders\UserSeeder.php
+- database\seeders\CategorySeeder.php
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Si se desea almacenar más categorías o más usuarios, simplemente se pueden modificar estos archivos.
