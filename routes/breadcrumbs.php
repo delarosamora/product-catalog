@@ -33,7 +33,12 @@ Breadcrumbs::for('products.create', function (BreadcrumbTrail $trail) {
     $trail->push('Crear Producto', route('products.create'));
 });
 
-// List Products
+// Login
 Breadcrumbs::for('login', function (BreadcrumbTrail $trail) {
     $trail->push('Iniciar sesión', route('login'));
+});
+
+// Change Password
+Breadcrumbs::for('change-password', function (BreadcrumbTrail $trail) {
+    $trail->push('Cambiar contraseña', route('changePassword'));
 });

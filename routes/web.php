@@ -27,4 +27,6 @@ Route::resource('/products', ProductController::class)->middleware('auth');
 
 Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/login', [UserController::class, 'doLogin'])->name('do-login');
-Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+Route::get('/logout', [UserController::class, 'logout'])->name('logout')->middleware('auth');
+Route::get('/change-password', [UserController::class, 'changePassword'])->name('changePassword')->middleware('auth');
+Route::post('/change-password', [UserController::class, 'doChangePassword'])->name('do-changePassword')->middleware('auth');

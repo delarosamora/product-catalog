@@ -18,6 +18,7 @@
               {{ Auth::user()->name }}
             </a>
             <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{ route('changePassword') }}">Cambiar contraseña</a></li>
               <li><a class="dropdown-item" href="{{ route('logout') }}">Cerrar sesión</a></li>
             </ul>
           </li>   

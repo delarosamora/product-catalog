@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\UserLoginRequest;
 use Auth;
-use Request;
+use Hash;
 
 class UserController extends Controller
 {
@@ -41,8 +42,24 @@ class UserController extends Controller
 
     public function changePassword()
     {
-        //TODO CAMBIAR CONTRASEÑA
-        Auth::logout();
-        return redirect('/');
+        $user = Auth::user();
+        #region SEO
+        $seoTitle = $user->name;
+        $separator = config('seo.separator');
+        $appName = config('app.name');
+        $seoImage = config('seo.image_site');
+        $appUrl = config('app.url');
+        seo()->title("$seoTitle $separator $appName");
+        seo()->image("$appUrl/storage/$seoImage");
+        #endregion
+        return view('users.change-password');
+    }
+
+    public function doChangePassword(ChangePasswordRequest $request)
+    {
+        $user = Auth::user();
+        $user->password = Hash::make($request->password);
+        $user->save();
+        return back()->with('notification', ['status' => 'success', 'title' => $user->name, 'text' => 'Contraseña cambiada correctamente']);
     }
 }
